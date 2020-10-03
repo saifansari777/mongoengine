@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+	<title>MongoApp</title>
+
+</head>
+<body>
+	<form action="/" method="POST">
+		<input type="text" name="title" placeholder="title">
+		<input type="text" name="note" placeholder="title">
+		<input type="submit" value="ADD">
+	</form>
+
+	{% for note in notes %}
+	{% if note.title %}
+		<h1> {{note.title}} </h1>
+		<p> {{note.note}} </p>
+		<p>{{ note.id}}</p>
+		<form method="POST" action="./delete">
+  <input type="hidden" value="{{note.id}}" name="id">
+  <input class="input-text" type="submit" value="Delete">
+  <button class="input-text"><a href="{{ url_for('update', id=note.id) }}">Update</a></button>
+  {% endif %}
+</form>
+	{% endfor %}
+</body>
+</html>
